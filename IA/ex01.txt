@@ -1,0 +1,18 @@
+1)
+	a) Sistema de diagnóstico médico.
+		Performance: Encontrar o diagnóstico corretamente, não ser muito invasivo, velocidade.
+		Ambiente: Paciente, hospital, equipe.
+		Atuadores: Monitor, testes, indicações, tratamentos
+		Sensores: Scanner, Raio X, Aparelho de medir pressão, estetoscopio
+
+	b) Robô de seleção de peças
+		Performance: Selecionar peças válidas
+		Ambiente: Peças, esteira
+		Atuadores: braço mecanico, pistão
+		Sensores: Camera, console
+
+	c) Instrutor de Inglês Interativo
+		Performance: maximizar nota do aluno em teste
+		Ambiente: Os alunos, sala, instituição
+		Atuadores: Auto falante, tela
+		Sensores: microfone, teclado, camera
