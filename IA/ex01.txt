@@ -16,3 +16,6 @@
 		Ambiente: Os alunos, sala, instituição
 		Atuadores: Auto falante, tela
 		Sensores: microfone, teclado, camera
+		
+		
+		fodam-se seus bostas
