@@ -1,0 +1,47 @@
+UC01 – Manter perfis
+	- Simples (5)
+	- Ator complexo (3)
+UC02 – Manter dietas
+	- Simples (5)
+	- Ator complexo (3)
+UC03 – Manter lembretes 
+	- Simples (5)
+	- Ator complexo (3)
+UC04 – Manter alimentos 
+	- Simples (5)
+	- Ator complexo (3)
+UC05 – Gerador de dietas 
+	- Medio (10)
+	- Ator complexo (3)
+
+T3 - Usabilidade (1) * Relevancia 5 = 5
+T6 - Facilidade de instalar (0.5) * Relevancia 5 = 2.5
+T8 - Facilidade de atualização (1) * Relevancia 5 = 5
+
+Total fator = 12.5
+0.6 + (0.01 * 12.5) = 0,725
+
+Fator ambiental
+E1 - Familiaridade com UML (1.5)
+E2 - Experiencia na aplicação (0.5)
+E3 - Experiência com OOP (1)
+E4 - Experiência dos analistas (0.5)
+E5 - Motivação (1)
+
+Total fator = 5.5
+1.4 + (-0.03 * 16.5) = 0,905
+
+Total de pontos UC = 36pts
+Total fator complx = 29pts
+Total fator amb = 14
+
+106 horas UC01
+106 horas UC02
+106 horas UC03
+106 horas UC04
+212 horas UC05
+__________
+635 horas
+
+
+
