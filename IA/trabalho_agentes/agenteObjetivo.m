@@ -1,7 +1,11 @@
-%Gera ações aleatórias no caso em que o quadrado está limpo, senão aspira o
-%pó
-function acao=agenteObjetivo(percepcao, ObjObtido)
+function acao = agenteObjetivo(percepcao, ObjObtido)
 
+objetivo = checkObj(ObjObtido)
+if objetivo == 1
+  acao = 6
+else
+  acao = agenteReativoSimples(percepcao)
+end
 
 
 end

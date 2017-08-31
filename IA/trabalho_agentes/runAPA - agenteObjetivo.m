@@ -2,7 +2,6 @@ clear all;
 clc;
 close all;
 
-
 sala = geraAmbiente() 
 mostraAmbiente(sala) 
 posicaoAspirador(2, 2)
@@ -14,7 +13,11 @@ percepcao.acao_anterior = 4
 
 while 1
   percepcao.sujo = sala(percepcao.x, percepcao.y)
-  acao = agenteReativoSimples(percepcao)
+  acao = agenteObjetivo(percepcao,sala)
+  
+  if acao == 6
+    break
+  end
   
   if acao != 5
     percepcao.acao_anterior = acao
