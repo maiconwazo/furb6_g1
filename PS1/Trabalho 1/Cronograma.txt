@@ -1,17 +1,17 @@
-UC01 – Manter perfis
+﻿UC01 – Manter perfis - 13
+	- Simples (10)
+	- Ator complexo (3)
+UC02 – Manter dietas - 8
 	- Simples (5)
 	- Ator complexo (3)
-UC02 – Manter dietas
+UC03 – Manter lembretes  - 8
+	- Simples (5)
+	- Ator complexo (3) 
+UC04 – Manter alimentos - 8
 	- Simples (5)
 	- Ator complexo (3)
-UC03 – Manter lembretes 
-	- Simples (5)
-	- Ator complexo (3)
-UC04 – Manter alimentos 
-	- Simples (5)
-	- Ator complexo (3)
-UC05 – Gerador de dietas 
-	- Medio (10)
+UC05 – Gerador de dietas - 18
+	- Medio (15)
 	- Ator complexo (3)
 
 T3 - Usabilidade (1) * Relevancia 5 = 5
@@ -28,20 +28,18 @@ E3 - Experiência com OOP (1)
 E4 - Experiência dos analistas (0.5)
 E5 - Motivação (1)
 
-Total fator = 5.5
-1.4 + (-0.03 * 16.5) = 0,905
+Total fator = 4.5
+1.4 + (-0.03 * 4.5) = 1,265
 
-Total de pontos UC = 36pts
-Total fator complx = 29pts
-Total fator amb = 14
-
-106 horas UC01
-106 horas UC02
-106 horas UC03
-106 horas UC04
-212 horas UC05
+UC01 - 0,725 * 1,265 * 13 = 12 * 4 = 48
+UC02 - 0,725 * 1,265 * 8 = 7,5 * 4 = 30
+UC03 - 0,725 * 1,265 * 8 = 7,5 * 4 = 30
+UC04 - 0,725 * 1,265 * 8 = 7,5 * 4 = 30
+UC05 - 0,725 * 1,265 * 18 = 17 * 4 = 68
 __________
-635 horas
+186 horas
+
+Documentação
 
 
 
