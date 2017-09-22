@@ -35,11 +35,9 @@ for i = 1:tamPop
   pais(i,:) = randperm(npar);
   
   a.codigo = i;  
-  a.aptidao = cvfun(pais(i,:));
   populacao(i,:) = a;
 endfor
 
-populacao = bubble(populacao);
 
 % calcular o custo da populacao utilizando a funcao de aptidao
 % colocar o custo minimo no elemento 1 (Veja funcao sort)
@@ -50,6 +48,11 @@ populacao = bubble(populacao);
 maxit=10000
 %% Interacao pelas geracoes (LOOP PRINCIPAL)
 while iag<maxit
+    for i = 1:tamPop
+        populacao(i,:).aptidao = cvfun(pais(populacao(i,:).codigo,:));
+    endfor
+
+    populacao = bubble(populacao);
     
     iag=iag+1; % incrementa o contador de geracoes
     
@@ -67,21 +70,20 @@ while iag<maxit
         pai2 = pais(populacao(indPai2(ic),:).codigo,:)
         
         pais(populacao(novaPos).codigo,:) = pai1;
-        pais(populacao(novaPos + 1).codigo,:) = pai2;
+        pais(populacao(novaPos + 1).codigo,:) = pai2;   
         
-        index = randi(length(pai1));
-        temp = pais(populacao(novaPos).codigo,index);
-        pais(populacao(novaPos).codigo,index) = pais(populacao(novaPos + 1).codigo,index);
-        pais(populacao(novaPos + 1).codigo,index) = temp;        
-        
-        repetido = verificaGenteReptido(pais(populacao(novaPos).codigo,:), index);
-        while repetido != 0
-          
-          repetido = verificaGenteReptido(pais(populacao(novaPos).codigo,:), index);          
+        repetido = randi(length(pai1));
+        while repetido != 0                  
+            temp = pais(populacao(novaPos).codigo,repetido);
+            pais(populacao(novaPos).codigo,repetido) = pais(populacao(novaPos + 1).codigo,repetido);
+            pais(populacao(novaPos + 1).codigo,repetido) = temp;  
+
+            repetido = verificaGenteReptido(pais(populacao(novaPos).codigo,:), repetido);          
         end
         
         novaPos = novaPos + 2;
     endfor
+
         %seleciona o Pai 1
         %seleciona o Pai 2
        
