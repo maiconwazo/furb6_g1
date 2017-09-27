@@ -3,13 +3,18 @@ function indexGene = verificaGenteReptido(c, index)
   for i = 1 : length(c)
     if (i == index)
       continue;
-    endif
+    end;
       
-    for j = i + 1 : length(c)
-      if (c(i) == c(j))
-        indexGene = i;
-        break;
-      endif;      
+    for j = 1 : length(c)
+      if (i != j)
+        if (c(i) == c(j))
+          indexGene = i;
+          break;
+        end;     
+       end; 
     end
+    
+    if indexGene
+      break;
   end
 end

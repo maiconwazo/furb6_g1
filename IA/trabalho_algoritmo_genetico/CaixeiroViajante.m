@@ -35,6 +35,7 @@ for i = 1:tamPop
   pais(i,:) = randperm(npar);
   
   a.codigo = i;  
+  a.aptidao = 0;
   populacao(i,:) = a;
 endfor
 
@@ -45,29 +46,29 @@ endfor
 % calcula o custo minimo da populacao (veja funcao min)
 % calcula a media aritmetica da populacao (veja funcao mean)
 
-maxit=10000
+maxit=100;
 %% Interacao pelas geracoes (LOOP PRINCIPAL)
 while iag<maxit
     for i = 1:tamPop
         populacao(i,:).aptidao = cvfun(pais(populacao(i,:).codigo,:));
-    endfor
+    end
 
     populacao = bubble(populacao);
     
     iag=iag+1; % incrementa o contador de geracoes
     
-    % Escolha do Pai1 e Pa2 que são escolhidos aleatoriamente do vetor
+    % Escolha do Pai1 e Pa2 que sï¿½o escolhidos aleatoriamente do vetor
     % probab
-    escolha1=ceil(Nprobab*rand(1,M)); % escolher aleatoriamente na roleta os indivíduos
-    escolha2=ceil(Nprobab*rand(1,M)); % escolher aleatoriamente na roleta os indivíduos
+    escolha1=ceil(Nprobab*rand(1,M)); % escolher aleatoriamente na roleta os indivï¿½duos
+    escolha2=ceil(Nprobab*rand(1,M)); % escolher aleatoriamente na roleta os indivï¿½duos
     indPai1=probab(escolha1); % selecionar os indices escolhidos na roleta para o pai 1
     indPai2=probab(escolha2); % selecionar os indices escolhidos na roleta para o pai 2
     
     % Execucao da Recombinacao (crossover)
     novaPos = 11;
     for ic=1:M        
-        pai1 = pais(populacao(indPai1(ic),:).codigo,:)
-        pai2 = pais(populacao(indPai2(ic),:).codigo,:)
+        pai1 = pais(populacao(indPai1(ic),:).codigo,:);
+        pai2 = pais(populacao(indPai2(ic),:).codigo,:);
         
         pais(populacao(novaPos).codigo,:) = pai1;
         pais(populacao(novaPos + 1).codigo,:) = pai2;   
@@ -82,23 +83,24 @@ while iag<maxit
         end
         
         novaPos = novaPos + 2;
-    endfor
-
+    end    
         %seleciona o Pai 1
         %seleciona o Pai 2
        
         
-        % Faz a técnica de recombinação Cycle
+        % Faz a tï¿½cnica de recombinaï¿½ï¿½o Cycle
 
     % Faz a Mutacao da populacao
 
    
-    % Se calcula um novo custo para a nova população
+    % Se calcula um novo custo para a nova populaï¿½ï¿½o
     
     
     %_______________________________________________________
     % Organiza em ordem crescente os custos e associa aos parametros
 end
+    
+disp(pais);
 
 %_______________________________________________________
 % Mostrar os resultados
