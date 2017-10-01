@@ -20,24 +20,24 @@ end
 Nprobab=length(probab);
 probab=manter-probab+1; 
 
-iag=0; % contador para iniciar a geracao
 for i = 1:tamPop
-  pais(i,:) = randperm(npar);
+  pais(i,:) = randperm(npar); % dicionario com os cromossomos (essa lista nao é ordenada, serve só de dicionario)
   
-  a.codigo = i;  
+  a.codigo = i;  % a lista populacao é ordenada por aptidao e armazena o codigo dos cromossomos (posição da matriz "pais"
   a.aptidao = 0;
   populacao(i,:) = a;
-endfor
+end
 
 
+iag=0; % contador para iniciar a geracao
 % calcular o custo da populacao utilizando a funcao de aptidao
 maxit=10000;
 while iag<maxit
     for i = 1:tamPop
-        populacao(i,:).aptidao = cvfun(pais(populacao(i,:).codigo,:));
+        populacao(i,:).aptidao = cvfun(pais(populacao(i,:).codigo,:)); % calcula aptidao
     end
 
-    populacao = bubble(populacao);
+    populacao = bubble(populacao);  %ordena por aptidao menor
     
     iag=iag+1; % incrementa o contador de geracoes
     
@@ -53,16 +53,16 @@ while iag<maxit
         pai1 = pais(populacao(indPai1(ic),:).codigo,:);
         pai2 = pais(populacao(indPai2(ic),:).codigo,:);
         
-        pais(populacao(novaPos).codigo,:) = pai1;
-        pais(populacao(novaPos + 1).codigo,:) = pai2;   
+        pais(populacao(novaPos).codigo,:) = pai1; % copia o pai um para depois fazer as alterações
+        pais(populacao(novaPos + 1).codigo,:) = pai2; % copia o pai dois para depois fazer as alterações  
         
         repetido = randi(length(pai1));
-        while repetido != 0                  
+        while repetido != 0                  % fica nesse loop ate não ter mais nenhum repetido
             temp = pais(populacao(novaPos).codigo,repetido);
             pais(populacao(novaPos).codigo,repetido) = pais(populacao(novaPos + 1).codigo,repetido);
             pais(populacao(novaPos + 1).codigo,repetido) = temp;  
 
-            repetido = verificaGenteReptido(pais(populacao(novaPos).codigo,:), repetido);          
+            repetido = verificaGenteReptido(pais(populacao(novaPos).codigo,:), repetido);        % retorna posição do gene repetido  
         end
         
         mutacao1 = randi(20);
@@ -71,14 +71,27 @@ while iag<maxit
         temp_mut = pais(populacao(novaPos).codigo,mutacao1);
         pais(populacao(novaPos).codigo,mutacao1) = pais(populacao(novaPos).codigo,mutacao2);
         pais(populacao(novaPos).codigo,mutacao2) = temp_mut;
+        % haviamos feito mutação nos dois membros, mas retiramos, seguindo a parte do enunciado que diz:
+        % "O operador de mutação escolhe aleatoriamente dois números inteiros em UM cromossomo da nova geração e os troca"
         
-        temp_mut = pais(populacao(novaPos + 1).codigo,mutacao1);
-        pais(populacao(novaPos + 1).codigo,mutacao1) = pais(populacao(novaPos + 1).codigo,mutacao2);
-        pais(populacao(novaPos + 1).codigo,mutacao2) =temp_mut;
+      %  temp_mut = pais(populacao(novaPos + 1).codigo,mutacao1);
+      %  pais(populacao(novaPos + 1).codigo,mutacao1) = pais(populacao(novaPos + 1).codigo,mutacao2);
+      %  pais(populacao(novaPos + 1).codigo,mutacao2) =temp_mut;
         
         novaPos = novaPos + 2;
     end    
 end
-    
-disp(pais);
+
+populacao = bubble(populacao);
+  
+disp("Tamanho da populacao: ");
+disp(length(populacao));  
+disp("Taxa de mutacao: ");
+disp("0,05");  
+disp("Numero de cidades: ");
+disp(npar);  
+disp("Melhor custo: ");
+disp(populacao(1).aptidao);
+disp("Melhor solucao: ")
+disp(pais(populacao(1).codigo,:));
 
