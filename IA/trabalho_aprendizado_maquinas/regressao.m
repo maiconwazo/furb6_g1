@@ -1,4 +1,4 @@
-function [b0, b1] = regressao(x, y)
+function [y, b0, b1] = regressao(x, y)
   meanX = mean(x);
   meanY = mean(y);
 
@@ -15,5 +15,5 @@ function [b0, b1] = regressao(x, y)
 
   b1 = top / bottom;
   b0 = meanY - (b1 * meanX);
-  % y =  b0 + (b1 * ?);
+  y =  b0 + (b1 * x);
 end
