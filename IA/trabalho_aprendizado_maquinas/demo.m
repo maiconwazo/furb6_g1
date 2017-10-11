@@ -15,3 +15,5 @@ hold on;
 plot(v1,R2);
 str = char ("correlacao ", num2str(R1), "\n", "regressao b0: ", num2str(b0), " b1: ", num2str(b1));
 title(str);
+
+% 3º data set é inapropriado
