@@ -1,3 +1,10 @@
+% Alunos:
+% - Guilherme Bacca
+% - Maicon Santos
+% - Mateus Clemer
+% - Matheus Klauberg
+% - Tamire Kistner
+
 function b = regmultipla(X, y)
   Xtranspose = ctranspose(X);
 

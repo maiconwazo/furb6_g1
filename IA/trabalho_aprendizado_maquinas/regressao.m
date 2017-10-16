@@ -1,3 +1,10 @@
+% Alunos:
+% - Guilherme Bacca
+% - Maicon Santos
+% - Mateus Clemer
+% - Matheus Klauberg
+% - Tamire Kistner
+
 function [y, b0, b1] = regressao(x, y)
   meanX = mean(x);
   meanY = mean(y);

@@ -1,3 +1,10 @@
+% Alunos:
+% - Guilherme Bacca
+% - Maicon Santos
+% - Mateus Clemer
+% - Matheus Klauberg
+% - Tamire Kistner
+
 function R = correlacao(x, y)
   meanX = mean(x);
   meanY = mean(y);
@@ -16,7 +23,3 @@ function R = correlacao(x, y)
 
   R = top / bottom;
 end
-
-% Soma ((x – média de x) * (y – média de y))
-% - Dividido -
-% Raiz quadrada ( (soma de (x – média de x)2 ) * (soma de (y – média de y)2 ))
