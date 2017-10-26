@@ -1,4 +1,10 @@
-% TODO
+% Alunos:
+% - Guilherme Bacca
+% - Maicon Santos
+% - Mateus Clemer
+% - Matheus Klauberg
+% - Tamire Kistner
+
 function visualizaPontos(dados, rotulos, d1, d2)
   figure; clf; hold on
 

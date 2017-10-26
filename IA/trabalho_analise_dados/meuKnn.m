@@ -1,5 +1,12 @@
+% Alunos:
+% - Guilherme Bacca
+% - Maicon Santos
+% - Mateus Clemer
+% - Matheus Klauberg
+% - Tamire Kistner
+
 function prev = meuKnn(dadosTrain, rotuloTrain, dadosTeste, k)
-  distancia = ones(50, 100);
+  distancia = ones(length(dadosTeste), length(dadosTrain));
 
   for indexTst = 1 : length(dadosTeste)
     for indexTr = 1 : length(dadosTrain)
