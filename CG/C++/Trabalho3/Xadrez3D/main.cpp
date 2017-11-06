@@ -1,8 +1,5 @@
 #include <glew.h>
 #include <freeglut.h>
-#include <math.h>
-#include <cmath>
-#include <iostream>
 
 const float C_BASE_X = 0.0f;
 const float C_BASE_Y = 0.0f;
@@ -187,7 +184,7 @@ void display(void)
 
 void init(void)
 {
-	glClearColor(0.1, 0.1, 0.6, 1);
+	glClearColor(0.1f, 0.1f, 0.6f, 1.0f);
 
 	GLfloat luzPos[] = { C_LADO_TAB_X / 2,  3.0f, C_LADO_TAB_Z / 2, 1.0f };
 	GLfloat luzAmb[] = { 0.0f,  0.0f, 0.0f, 1.0f };
