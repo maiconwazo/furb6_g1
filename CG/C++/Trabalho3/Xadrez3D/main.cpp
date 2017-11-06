@@ -15,8 +15,8 @@ const GLfloat whiteDif[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 const GLfloat whiteSpe[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 
 const GLfloat blackAmb[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-const GLfloat blackDif[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-const GLfloat blackSpe[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+const GLfloat blackDif[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+const GLfloat blackSpe[] = { 0.3f, 0.3f, 0.3f, 1.0f };
 
 const GLfloat purpleAmb[] = { 0.3f, 0.0f, 0.3f, 1.0f };
 const GLfloat purpleDif[] = { 0.3f, 0.0f, 0.3f, 1.0f };
@@ -34,11 +34,41 @@ const GLfloat brownAmb[] = { 0.3f, 0.0f, 0.0f, 1.0f };
 const GLfloat brownDif[] = { 0.6f, 0.0f, 0.0f, 1.0f };
 const GLfloat brownSpe[] = { 0.3f, 0.0f, 0.0f, 1.0f };
 
+const GLfloat blackChessAmb[] = { 0.16f, 0.06f, 0.05f, 1.0f };
+const GLfloat blackChessDif[] = { 0.33f, 0.12f, 0.10f, 1.0f };
+const GLfloat blackChessSpe[] = { 0.16f, 0.06f, 0.05f, 1.0f };
+
+const GLfloat whiteChessAmb[] = { 0.5f, 0.45f, 0.30f, 1.0f };
+const GLfloat whiteChessDif[] = { 1.0f, 0.90f, 0.60f, 1.0f };
+const GLfloat whiteChessSpe[] = { 0.5f, 0.45f, 0.30f, 1.0f };
+
 enum Player { player1, player2 };
-enum Color { white, black, blue, gray, brown, purple };
+enum Color { white, black, blue, gray, brown, purple, blackChess, whiteChess };
 
 Player playerAtual = player1;
 GLfloat proporcao;
+
+float xPeca, zPeca, basePeca;
+
+float matrizPosPecas[8][8][2];
+int matrizTabuleiro[8][8] = { 
+	{ 1, 1, 1, 1, 1, 1, 1, 1 },
+	{ 1, 1, 1, 1, 1, 1, 1, 1 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 7, 7, 7, 7, 7, 7, 7, 7 },
+	{ 7, 7, 7, 7, 7, 7, 7, 7 }
+};
+
+void desenharPeao(int xCoord, int zCoord) {
+	glPushMatrix();
+	glTranslatef(matrizPosPecas[xCoord][zCoord][0], C_ALT_TAB, matrizPosPecas[xCoord][zCoord][1]);
+	glRotatef(-90, 1, 0, 0);
+	glutSolidCone(basePeca, 1.0f, 50, 50); 
+	glPopMatrix();
+}
 
 void configureColor(Color c) {
 	switch (c) {
@@ -71,6 +101,16 @@ void configureColor(Color c) {
 		glMaterialfv(GL_FRONT, GL_AMBIENT, purpleAmb);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, purpleDif);
 		glMaterialfv(GL_FRONT, GL_SPECULAR, purpleSpe);
+		break;
+	case blackChess:
+		glMaterialfv(GL_FRONT, GL_AMBIENT, blackChessAmb);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, blackChessDif);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, blackChessSpe);
+		break;
+	case whiteChess:
+		glMaterialfv(GL_FRONT, GL_AMBIENT, whiteChessAmb);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, whiteChessDif);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, whiteChessSpe);
 		break;
 	}
 }
@@ -120,65 +160,32 @@ void desenhaTabuleiro() {
 	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_BASE_Z);
 	glEnd();
 
-	configureColor(black);
-
-	float listraPreta = 0.2f;
-	glBegin(GL_QUADS); // listra preta 
-	glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
-	glVertex3f(C_BASE_X + listraPreta, C_ALT_TAB, C_BASE_Z + listraPreta);
-	glVertex3f(C_BASE_X + listraPreta, C_ALT_TAB, C_LADO_TAB_Z - listraPreta);
-	glVertex3f(C_LADO_TAB_X - listraPreta, C_ALT_TAB, C_LADO_TAB_Z - listraPreta);
-	glVertex3f(C_LADO_TAB_X - listraPreta, C_ALT_TAB, C_BASE_Z + listraPreta);
-	glEnd();
-
-	configureColor(white);
-
-	float listraBranca = 0.3f;
-	glBegin(GL_QUADS); // listra branca 
-	glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
-	glVertex3f(C_BASE_X + listraBranca, C_ALT_TAB, C_BASE_Z + listraBranca);
-	glVertex3f(C_BASE_X + listraBranca, C_ALT_TAB, C_LADO_TAB_Z - listraBranca);
-	glVertex3f(C_LADO_TAB_X - listraBranca, C_ALT_TAB, C_LADO_TAB_Z - listraBranca);
-	glVertex3f(C_LADO_TAB_X - listraBranca, C_ALT_TAB, C_BASE_Z + listraBranca);
-	glEnd();
-
-	configureColor(blue);
-
-	float listraAzul = 0.5f;
-	glBegin(GL_QUADS); // listra azul
-	glNormal3f(0.0f, C_ALT_TAB + 1.0f, 0.0f); //?
-	glVertex3f(C_BASE_X + listraAzul, C_ALT_TAB, C_BASE_Z + listraAzul);
-	glVertex3f(C_BASE_X + listraAzul, C_ALT_TAB, C_LADO_TAB_Z - listraAzul);
-	glVertex3f(C_LADO_TAB_X - listraAzul, C_ALT_TAB, C_LADO_TAB_Z - listraAzul);
-	glVertex3f(C_LADO_TAB_X - listraAzul, C_ALT_TAB, C_BASE_Z + listraAzul);
-	glEnd();
-
 	float bordaTotal = 0.6f;
-	float xPeca = (C_LADO_TAB_X - bordaTotal * 2) / 8;
-	float zPeca = (C_LADO_TAB_Z - bordaTotal * 2) / 8;
 	bool useBlack = false;
 	bool troca = true;
 
-	for (GLfloat X = 0; X < 8; X++) {
-		for (GLfloat Z = 0; Z < 8; Z++) {
+	xPeca = (C_LADO_TAB_X - bordaTotal * 2) / 8;
+	zPeca = (C_LADO_TAB_Z - bordaTotal * 2) / 8;
+	basePeca = (xPeca > zPeca) ? zPeca / 3 : xPeca / 3;
+
+	for (int X = 0; X < 8; X++) {
+		for (int Z = 0; Z < 8; Z++) {
 			if (troca) {
 				useBlack = !useBlack;
 			}
 			else { troca = true; }
 
 			glBegin(GL_QUADS);
-
-			if ((X < 7) || (Z < 7))
-				configureColor(useBlack ? black : white);
-			else
-				configureColor(purple);
-
+			configureColor(useBlack ? blackChess : whiteChess);
 			glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
-			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB, (Z * xPeca) + bordaTotal);
-			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB, (Z * xPeca) + bordaTotal + zPeca);
-			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB, (Z * xPeca) + bordaTotal + zPeca);
-			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB, (Z * xPeca) + bordaTotal);
+			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB + 0.01, (Z * xPeca) + bordaTotal);
+			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB + 0.01, (Z * xPeca) + bordaTotal + zPeca);
+			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.01, (Z * xPeca) + bordaTotal + zPeca);
+			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.01, (Z * xPeca) + bordaTotal);
 			glEnd();
+
+			matrizPosPecas[X][Z][0] = ((Z * xPeca) + bordaTotal) + (zPeca / 2);
+			matrizPosPecas[X][Z][1] = ((X * xPeca) + bordaTotal) + (xPeca / 2);
 		}
 
 		troca = false;
@@ -194,19 +201,38 @@ void display(void)
 	configureColor(brown);
 	glBegin(GL_QUADS);
 	float x = 1.0f, z = 1.5f;
+	glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
 	glVertex3f(C_BASE_X - x,		C_BASE_Y,	C_BASE_Z - z		);
 	glVertex3f(C_BASE_X - x,		C_BASE_Y,	C_LADO_TAB_Z + z	);
-	glVertex3f(C_LADO_TAB_X + x, C_BASE_Y,	C_LADO_TAB_Z + z		);
-	glVertex3f(C_LADO_TAB_X + x, C_BASE_Y,	C_BASE_Z - z			);
+	glVertex3f(C_LADO_TAB_X + x,	C_BASE_Y,	C_LADO_TAB_Z + z	);
+	glVertex3f(C_LADO_TAB_X + x,	C_BASE_Y,	C_BASE_Z - z		);
 	glEnd;
 
-	desenhaTabuleiro();	
+	desenhaTabuleiro();
+
+	for (int x = 0; x < 8; x++) {
+		for (int z = 0; z < 8; z++) {
+			if (matrizTabuleiro[x][z] < 6)
+				configureColor(white);
+			else
+				configureColor(black);
+
+			switch (matrizTabuleiro[x][z]) {
+			case 1: desenharPeao(x, z); 
+				break;
+			case 7: desenharPeao(x, z);
+				break;
+			}			
+		}
+	}
+
 	glutSwapBuffers();
 }
 
 void init(void)
 {
 	glClearColor(C_COR_FUNDO[0], C_COR_FUNDO[1], C_COR_FUNDO[2], C_COR_FUNDO[3]);
+	glEnable(GL_DEPTH_TEST);
 
 	GLfloat luzPos[] = { C_LADO_TAB_X / 2,  3.0f, C_LADO_TAB_Z / 2, 1.0f };
 	GLfloat luzAmb[] = { 0.0f,  0.0f, 0.0f, 1.0f };
