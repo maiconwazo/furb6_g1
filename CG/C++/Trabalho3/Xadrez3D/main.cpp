@@ -42,25 +42,36 @@ const GLfloat whiteChessAmb[] = { 0.5f, 0.45f, 0.30f, 1.0f };
 const GLfloat whiteChessDif[] = { 1.0f, 0.90f, 0.60f, 1.0f };
 const GLfloat whiteChessSpe[] = { 0.5f, 0.45f, 0.30f, 1.0f };
 
-enum Player { player1, player2 };
-enum Color { white, black, blue, gray, brown, purple, blackChess, whiteChess };
+const GLfloat blueTranspAmb[] = { 0.0f, 0.0f, 0.6f, 0.4f };
+const GLfloat blueTranspDif[] = { 0.0f, 0.0f, 0.8f, 0.4f };
+const GLfloat blueTranspSpe[] = { 0.0f, 0.0f, 0.7f, 0.4f };
 
-Player playerAtual = player1;
+const GLfloat darkBlueTranspAmb[] = { 0.0f, 0.0f, 0.1f, 0.6f };
+const GLfloat darkBlueTranspDif[] = { 0.0f, 0.0f, 0.3f, 0.6f };
+const GLfloat darkBlueTranspSpe[] = { 0.0f, 0.0f, 0.1f, 0.6f };
+
+enum Player { player1, player2 };
+enum Color { white, black, blue, gray, brown, purple, blackChess, whiteChess, blueTransp, darkBlueTransp };
 GLfloat proporcao;
 
-float xPeca, zPeca, basePeca;
+Player playerAtual = player1;
+Player playerJogando = player1;
 
+float xPeca, zPeca, basePeca;
 float matrizPosPecas[8][8][2];
-int matrizTabuleiro[8][8] = { 
-	{ 1, 1, 1, 1, 1, 1, 1, 1 },
-	{ 1, 1, 1, 1, 1, 1, 1, 1 },
-	{ 0, 0, 0, 0, 0, 0, 0, 0 },
-	{ 0, 0, 0, 0, 0, 0, 0, 0 },
-	{ 0, 0, 0, 0, 0, 0, 0, 0 },
-	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+int matrizTabuleiro[8][8] = {
 	{ 7, 7, 7, 7, 7, 7, 7, 7 },
-	{ 7, 7, 7, 7, 7, 7, 7, 7 }
+	{ 7, 7, 7, 7, 7, 7, 7, 7 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 1, 1, 1, 1, 1, 1, 1, 1 },
+	{ 1, 1, 1, 1, 1, 1, 1, 1 }
 };
+
+int pecaAtual[] = { 0, 7 };
+bool modoMovPeca = false;
 
 void desenharPeao(int xCoord, int zCoord) {
 	glPushMatrix();
@@ -112,6 +123,16 @@ void configureColor(Color c) {
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, whiteChessDif);
 		glMaterialfv(GL_FRONT, GL_SPECULAR, whiteChessSpe);
 		break;
+	case blueTransp:
+		glMaterialfv(GL_FRONT, GL_AMBIENT, blueTranspAmb);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, blueTranspDif);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, blueTranspSpe);
+		break;
+	case darkBlueTransp:
+		glMaterialfv(GL_FRONT, GL_AMBIENT, darkBlueTranspAmb);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, darkBlueTranspDif);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, darkBlueTranspSpe);
+		break;
 	}
 }
 
@@ -152,15 +173,40 @@ void desenhaTabuleiro() {
 
 	configureColor(white);
 
+	float bordaTotal = 0.6f;
+
 	glBegin(GL_QUADS); // topo principal
 	glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
 	glVertex3f(C_BASE_X, C_ALT_TAB, C_BASE_Z);
-	glVertex3f(C_BASE_X, C_ALT_TAB, C_LADO_TAB_Z);
-	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_LADO_TAB_Z);
+	glVertex3f(C_BASE_X, C_ALT_TAB, C_BASE_Z + bordaTotal);
+	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_BASE_Z + bordaTotal);
 	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_BASE_Z);
 	glEnd();
 
-	float bordaTotal = 0.6f;
+	glBegin(GL_QUADS); // topo principal
+	glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
+	glVertex3f(C_BASE_X, C_ALT_TAB, C_LADO_TAB_Z);
+	glVertex3f(C_BASE_X, C_ALT_TAB, C_LADO_TAB_Z - bordaTotal);
+	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_LADO_TAB_Z - bordaTotal);
+	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_LADO_TAB_Z);
+	glEnd();
+
+	glBegin(GL_QUADS); // topo principal
+	glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
+	glVertex3f(C_BASE_X, C_ALT_TAB, C_BASE_Z);
+	glVertex3f(C_BASE_X + bordaTotal, C_ALT_TAB, C_BASE_Z);
+	glVertex3f(C_BASE_X + bordaTotal, C_ALT_TAB, C_LADO_TAB_Z);
+	glVertex3f(C_BASE_X, C_ALT_TAB, C_LADO_TAB_Z);
+	glEnd();
+
+	glBegin(GL_QUADS); // topo principal
+	glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
+	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_BASE_Z);
+	glVertex3f(C_LADO_TAB_X - bordaTotal, C_ALT_TAB, C_BASE_Z);
+	glVertex3f(C_LADO_TAB_X - bordaTotal, C_ALT_TAB, C_LADO_TAB_Z);
+	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_LADO_TAB_Z);
+	glEnd();
+
 	bool useBlack = false;
 	bool troca = true;
 
@@ -178,16 +224,30 @@ void desenhaTabuleiro() {
 			glBegin(GL_QUADS);
 			configureColor(useBlack ? blackChess : whiteChess);
 			glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
-			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB + 0.01, (Z * xPeca) + bordaTotal);
-			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB + 0.01, (Z * xPeca) + bordaTotal + zPeca);
-			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.01, (Z * xPeca) + bordaTotal + zPeca);
-			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.01, (Z * xPeca) + bordaTotal);
+			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB,			(Z * xPeca) + bordaTotal);
+			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB,			(Z * xPeca) + bordaTotal + zPeca);
+			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB, (Z * xPeca) + bordaTotal + zPeca);
+			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB, (Z * xPeca) + bordaTotal);
 			glEnd();
 
 			matrizPosPecas[X][Z][0] = ((Z * xPeca) + bordaTotal) + (zPeca / 2);
 			matrizPosPecas[X][Z][1] = ((X * xPeca) + bordaTotal) + (xPeca / 2);
-		}
 
+			if ((playerAtual == playerJogando) && (X == pecaAtual[0]) && (Z == pecaAtual[1])) {
+				glEnable(GL_BLEND);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				glBegin(GL_QUADS);
+				configureColor(blueTransp);
+				glNormal3f(0.0f, C_ALT_TAB + 1, 0.0f); //?
+				glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal);
+				glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal + zPeca);
+				configureColor(darkBlueTransp);
+				glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal + zPeca);
+				glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal);
+				glEnd();
+				glEnable(GL_BLEND);
+			}
+		}
 		troca = false;
 	}
 }
@@ -275,8 +335,40 @@ void keyboard(unsigned char key, int x, int y) {
 		break;
 	case 'w': playerAtual = player2;
 		break;
+	case 'a': playerJogando = player1;
+		break;
+	case 's': playerJogando = player2;
+		break;
+	case 32: modoMovPeca = !modoMovPeca;
+		break;
 	}
 
+	display;
+	refreshCamera();
+}
+
+void keyboardSpecial(int key, int x, int y) {
+		switch (key)
+		{
+		case GLUT_KEY_LEFT: 
+			if ((playerAtual == player1) && (pecaAtual[0] > 0)) pecaAtual[0]--;
+			else if ((playerAtual == player2) && (pecaAtual[0] < 8)) pecaAtual[0]++;
+			break;
+		case GLUT_KEY_RIGHT: 
+			if ((playerAtual == player1) && (pecaAtual[0] < 7)) pecaAtual[0]++;
+			else if ((playerAtual == player2) && (pecaAtual[0] > 0)) pecaAtual[0]--;
+			break;
+		case GLUT_KEY_UP: 
+			if ((playerAtual == player1) && (pecaAtual[1] > 0)) pecaAtual[1]--;
+			else if ((playerAtual == player2) && (pecaAtual[1] < 8)) pecaAtual[1]++;
+			break;
+		case GLUT_KEY_DOWN: 
+			if ((playerAtual == player1) && (pecaAtual[1] < 7)) pecaAtual[1]++;
+			else if ((playerAtual == player2) && (pecaAtual[1] > 0)) pecaAtual[1]--;
+			break;
+		}
+
+	display;
 	refreshCamera();
 }
 
@@ -289,6 +381,7 @@ int main(int argc, char **argv) {
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
+	glutSpecialFunc(keyboardSpecial);
 	init();
 	
 	glutMainLoop();
