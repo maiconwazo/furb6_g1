@@ -1,0 +1,6 @@
+mysql://bfae5379f6ace0:2ca67453@us-cdbr-iron-east-05.cleardb.net/heroku_0e2db751905386c?reconnect=true
+
+user = bfae5379f6ace0
+password = 2ca67453
+hostname = us-cdbr-iron-east-05.cleardb.net
+scheme = heroku_0e2db751905386c

@@ -4,28 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassesDieta
+namespace DietFit
 {
 	class Perfil
 	{
-		public double Altura;
-		public double Peso;
+		public decimal Altura;
+		public decimal Peso;
 		public int Idade;
 		public IndiceAtividadeFisica AtvFisica;
 		public Sexo Sexo;
+		public string Mensagem;
 
-		public void GerarDieta(Objetivo Obj, int QtdRefeicoes) {
-			var multPeso = 0.0;
-			var multAltura = 0.0;
-			var multIdade = 0.0;
-			var multAtv = 0.0;
-			var valBase = 0;
+		public void GerarDieta(Objetivo Obj) {
+			decimal multPeso = 0.0m;
+			decimal multAltura = 0.0m;
+			decimal multIdade = 0.0m;
+			decimal multAtv = 0.0m;
+			decimal valBase = 0m;
 			switch (Sexo) {
 				case Sexo.sMasc:
-					multPeso = 13.7;
-					multAltura = 5.0;
-					multIdade = 6.8;
-					valBase = 66;
+					multPeso = 13.7m;
+					multAltura = 5.0m;
+					multIdade = 6.8m;
+					valBase = 66m;
 
 					if (Idade < 19)
 					{
@@ -35,13 +36,13 @@ namespace ClassesDieta
 								multAtv = 1;
 								break;
 							case IndiceAtividadeFisica.iaPoucoAtivo:
-								multAtv = 1.12;
+								multAtv = 1.12m;
 								break;
 							case IndiceAtividadeFisica.iaAtivo:
-								multAtv = 1.24;
+								multAtv = 1.24m;
 								break;
 							case IndiceAtividadeFisica.iaMuitoAtivo:
-								multAtv = 1.45;
+								multAtv = 1.45m;
 								break;
 						}
 					}
@@ -53,22 +54,22 @@ namespace ClassesDieta
 								multAtv = 1;
 								break;
 							case IndiceAtividadeFisica.iaPoucoAtivo:
-								multAtv = 1.12;
+								multAtv = 1.12m;
 								break;
 							case IndiceAtividadeFisica.iaAtivo:
-								multAtv = 1.29;
+								multAtv = 1.29m;
 								break;
 							case IndiceAtividadeFisica.iaMuitoAtivo:
-								multAtv = 1.59;
+								multAtv = 1.59m;
 								break;
 						}
 					}
 					break;
 				case Sexo.sFem:
-					multPeso = 9.6;
-					multAltura = 1.8;
-					multIdade = 4.7;
-					valBase = 655;
+					multPeso = 9.6m;
+					multAltura = 1.8m;
+					multIdade = 4.7m;
+					valBase = 655m;
 
 
 					if (Idade < 19)
@@ -79,13 +80,13 @@ namespace ClassesDieta
 								multAtv = 1;
 								break;
 							case IndiceAtividadeFisica.iaPoucoAtivo:
-								multAtv = 1.18;
+								multAtv = 1.18m;
 								break;
 							case IndiceAtividadeFisica.iaAtivo:
-								multAtv = 1.35;
+								multAtv = 1.35m;
 								break;
 							case IndiceAtividadeFisica.iaMuitoAtivo:
-								multAtv = 1.60;
+								multAtv = 1.60m;
 								break;
 						}
 					}
@@ -97,36 +98,37 @@ namespace ClassesDieta
 								multAtv = 1;
 								break;
 							case IndiceAtividadeFisica.iaPoucoAtivo:
-								multAtv = 1.16;
+								multAtv = 1.16m;
 								break;
 							case IndiceAtividadeFisica.iaAtivo:
-								multAtv = 1.27;
+								multAtv = 1.27m;
 								break;
 							case IndiceAtividadeFisica.iaMuitoAtivo:
-								multAtv = 1.44;
+								multAtv = 1.44m;
 								break;
 						}
 					}
 					break;
 			}
 
-			var totalKcal = valBase + ((Peso * multPeso) * multAtv) + (Altura * multAltura) - (Idade * multIdade);
+			decimal totalKcal = valBase + ((Peso * multPeso) * multAtv) + (Altura * multAltura) - (Idade * multIdade);
 			
 			if (Obj == Objetivo.oBulking)
 			{
-				totalKcal += totalKcal * 0.10;
+				totalKcal += totalKcal * 0.10m;
 			}
 			else if (Obj == Objetivo.oCutting)
 			{
-				totalKcal -= totalKcal * 0.10;
+				totalKcal -= totalKcal * 0.10m;
 			}
 
-			var gramasProt = Peso * 2;
-			var gramasGord = Peso;
-			var gramasCarb = (totalKcal - (gramasProt * 4) - (gramasGord * 9)) / 4;
+			decimal gramasProt = Peso * 2;
+			decimal gramasGord = Peso;
+			decimal gramasCarb = (totalKcal - (gramasProt * 4) - (gramasGord * 9)) / 4;
 
-			var dieta = new Dieta(totalKcal, gramasProt, gramasCarb, gramasGord, QtdRefeicoes);
+			var dieta = new Dieta(totalKcal, gramasProt, gramasCarb, gramasGord);
 			dieta.GerarRefeicoes();
+			Mensagem = dieta.Mensagem;
 		}
 	}
 }
