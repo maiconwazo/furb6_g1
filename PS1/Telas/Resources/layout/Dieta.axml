@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Nome"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="#008B8B"
+        android:id="@+id/textView1" />
+    <EditText
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#3CB371"
+        android:id="@+id/editText1"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@android:color/holo_blue_light" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:id="@+id/linearLayout1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout2">
+            <Button
+                android:text="Bulking"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/btnBulking"
+                android:textSize="20dp"
+                android:layout_margin="4dp"
+                android:background="@android:color/holo_green_light" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout3">
+            <Button
+                android:text="Cutting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/btnCutting"
+                android:textSize="20dp"
+                android:layout_margin="4dp"
+                android:background="@android:color/holo_green_light" />
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:text="Gerar dieta"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#3CB371"
+        android:id="@+id/btnGerar" />
+</LinearLayout>

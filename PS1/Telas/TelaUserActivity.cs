@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+
+namespace DietFit
+{
+    [Activity(Label = "TelaUserActivity")]
+    public class TelaUserActivity : Activity
+    {
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+
+            // Create your application here
+            SetContentView(Resource.Layout.TelaUser);
+
+            ConexaoLocal con = new ConexaoLocal();
+            
+            Perfil perfil = new Perfil();
+            TextView txtHello = FindViewById<TextView>(Resource.Id.txtHello);           
+
+
+            txtHello.Text = "Olá "+ con.GetPerfil(perfil);
+        }
+    }
+}

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="#ffffff">
+    <TextView
+        android:text="Nome"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:textColor="#008B8B"
+        android:id="@+id/txtNome" />
+    <EditText
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#3CB371"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/edNome"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@android:color/holo_blue_light" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutText">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="130dp"
+            android:id="@+id/linearLayout2">
+            <TextView
+                android:text="Idade"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="20dp"
+                android:textColor="#008B8B"
+                android:id="@+id/txtIdade"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout3">
+            <TextView
+                android:text="Sexo"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="20dp"
+                android:textColor="#008B8B"
+                android:id="@+id/txtGenero"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="53.5dp"
+        android:id="@+id/linearLayout4"
+        android:layout_marginBottom="10dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="130dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout5">
+            <EditText
+                android:inputType="number"
+                android:id="@+id/edIdade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#3CB371"
+                android:textSize="20dp"
+                android:backgroundTint="@android:color/holo_blue_light" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout6">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/radioGroup2">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Feminino"
+                    android:textColor="#008B8B"
+                    android:id="@+id/radioButton3" />
+                <RadioButton
+                    android:text="Masculino"
+                    android:id="@+id/radioButton2"
+                    android:textColor="#008B8B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout7">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_marginRight="80dp"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout8"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:text="Peso"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#008B8B"
+                android:id="@+id/textView1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout9">
+            <TextView
+                android:text="Altura"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#008B8B"
+                android:id="@+id/textView2" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="39.5dp"
+        android:id="@+id/linearLayout10"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="40dp"
+            android:id="@+id/linearLayout11">
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#3CB371"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:id="@+id/editText1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout12">
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#3CB371"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:id="@+id/editText2" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:text="Qual o seu nível de atividade diária?"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#008B8B"
+        android:gravity="center"
+        android:id="@+id/textView3"
+        android:layout_marginBottom="7dp" />
+    <RadioGroup
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/radioGroup3">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leve (Permanece sentado a maior parte do dia)"
+            android:id="@+id/radioButton4"
+            android:textSize="17dp"
+            android:textColor="#008B8B"
+            android:layout_marginBottom="5dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moderada (Permanece em pé a maior parte do dia)"
+            android:checked="true"
+            android:id="@+id/radioButton5"
+            android:textSize="17dp"
+            android:textColor="#008B8B"
+            android:layout_marginBottom="5dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elevada (Pratica atividades físicas periodicamente)"
+            android:id="@+id/radioButton6"
+            android:textSize="17dp"
+            android:textColor="#008B8B"
+            android:layout_marginBottom="5dp" />
+        <RadioButton
+            android:text="Intensa (Pratica atividades físicas diariamente)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton7"
+            android:textSize="17dp"
+            android:textColor="#008B8B" />
+    </RadioGroup>
+    <Button
+        android:text="Adicionar perfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3CB371"
+        android:textSize="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/btnAddPerfil" />
+</LinearLayout>
