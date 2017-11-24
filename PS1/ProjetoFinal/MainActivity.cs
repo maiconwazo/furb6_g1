@@ -22,7 +22,7 @@ namespace ProjetoFinal
 
             btnDieta.Click += delegate
             {
-                StartActivity(typeof(DietaActivity));
+                StartActivity(typeof(ConsultaDietasActivity));
             };
 
             btnPerfil.Click += delegate

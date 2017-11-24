@@ -148,6 +148,8 @@
     <Compile Include="ConexaoLocal.cs" />
     <Compile Include="ConsultaAlimentosActivity.cs" />
     <Compile Include="ConsultaAlimentosAdapter.cs" />
+    <Compile Include="ConsultaDietasActivity.cs" />
+    <Compile Include="ConsultaDietasAdapter.cs" />
     <Compile Include="ConsultaRefeicoesActivity.cs" />
     <Compile Include="CreditosActivity.cs" />
     <Compile Include="Dieta.cs" />
@@ -179,6 +181,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ConsultaAlimentos.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ConsultaDietas.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DietaLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

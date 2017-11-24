@@ -63,6 +63,18 @@ namespace ProjetoFinal
 				return r.First();
 		}
 
+		public bool DeletarDieta(int codigoDieta)
+		{
+			var dieta = GetDieta(codigoDieta);
+			if (dieta != null)
+			{
+				conexao.Delete(dieta);
+				return true;
+			} else {
+				return false;
+			}
+		} 
+
 		public List<Refeicao> GetRefeicoes(int codigoDieta)
 		{
 			return conexao.Query<Refeicao>("select * from Refeicao where IdDieta = " + codigoDieta);
