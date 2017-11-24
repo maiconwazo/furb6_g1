@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    <TextView
+        android:text="Diet Fit"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:textSize="50dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:textColor="#008B8B" />
+    <ImageView
+        android:src="@drawable/frutas"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:id="@+id/imageView1"
+        android:layout_marginBottom="10dp" />
+    <Button
+        android:text="Dietas"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btnDieta"
+        android:textSize="20dp"
+        android:background="#3CB371"
+        android:layout_margin="2dp" />
+    <Button
+        android:text="Perfil"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btnPerfl"
+        android:textSize="20dp"
+        android:background="#3CB371"
+        android:layout_margin="2dp" />
+    <Button
+        android:text="Configurações"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btnConfig"
+        android:textSize="20dp"
+        android:background="#3CB371"
+        android:layout_margin="2dp" />
+    <Button
+        android:text="Creditos"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btnCredito"
+        android:textSize="20dp"
+        android:background="#3CB371"
+        android:layout_margin="2dp" />
+</LinearLayout>
