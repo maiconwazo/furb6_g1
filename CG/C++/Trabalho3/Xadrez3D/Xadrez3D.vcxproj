@@ -20,6 +20,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="object\FaceMaterials.cpp" />
+    <ClCompile Include="object\Faces.cpp" />
+    <ClCompile Include="object\Material.cpp" />
+    <ClCompile Include="object\Materials.cpp" />
+    <ClCompile Include="object\ModelDimensions.cpp" />
+    <ClCompile Include="object\OBJModel.cpp" />
+    <ClCompile Include="object\Tokenizer.cpp" />
+    <ClCompile Include="object\Tuple3.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="object\FaceMaterials.h" />
+    <ClInclude Include="object\Faces.h" />
+    <ClInclude Include="object\Material.h" />
+    <ClInclude Include="object\Materials.h" />
+    <ClInclude Include="object\ModelDimensions.h" />
+    <ClInclude Include="object\OBJModel.h" />
+    <ClInclude Include="object\Tokenizer.h" />
+    <ClInclude Include="object\Tuple3.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{78025EA3-6AA9-43E7-916C-035384E0319B}</ProjectGuid>
@@ -77,10 +95,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\OpenGL\glew;..\OpenGL\freeglut;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\load;..\OpenGL\glew;..\OpenGL\freeglut;.\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\OpenGL\glew;..\OpenGL\freeglut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\load;.\;..\OpenGL\glew;..\OpenGL\freeglut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

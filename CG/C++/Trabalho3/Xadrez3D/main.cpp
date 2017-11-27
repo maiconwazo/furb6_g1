@@ -1,12 +1,34 @@
+#pragma comment(lib, "glew32.lib")
+#include <vector>
+#include <glm.hpp>
 #include <glew.h>
 #include <freeglut.h>
+#include <iostream>    
+#include <fstream>     
+#include <string>
+#include <sstream>
+#include <ctime>
+#include <windows.h>
 
-const float C_BASE_X = 0.0f;
-const float C_BASE_Y = 0.0f;
-const float C_BASE_Z = 0.0f;
-const float C_ALT_TAB = 0.3f + C_BASE_Y;
-const float C_LADO_TAB_X = 9.0f + C_BASE_X;
-const float C_LADO_TAB_Z = 9.0f + C_BASE_Z;
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <vector>
+#include <sstream>
+#include <queue>
+#include <map>
+#include <set>
+#include "object\OBJModel.h"
+
+
+using namespace std;
+
+const GLfloat C_BASE_X = 0.0f;
+const GLfloat C_BASE_Y = 0.0f;
+const GLfloat C_BASE_Z = 0.0f;
+const GLfloat C_ALT_TAB = 0.3f + C_BASE_Y;
+const GLfloat C_LADO_TAB_X = 9.0f + C_BASE_X;
+const GLfloat C_LADO_TAB_Z = 9.0f + C_BASE_Z;
 const GLfloat C_COR_FUNDO[] = { 0.2f, 0.2f, 0.5f, 1.0f };
 
 /* Definições de iluminação */
@@ -65,11 +87,17 @@ GLfloat proporcao;
 
 Player playerAtual = player1;
 Player playerJogando = player1;
+vector<OBJModel*> *loader;
 
 int quadradoAtual[] = { 0, 7 };
 bool modoMovPeca = false;
-float xPeca, zPeca, basePeca;
+GLfloat xPeca, zPeca, basePeca;
 Peca cemiterio1[16] = {}, cemiterio2[16] = {};
+
+std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
+std::vector< glm::vec3 > temp_vertices;
+std::vector< glm::vec2 > temp_uvs;
+std::vector< glm::vec3 > temp_normals;
 
 float cemiterioPos1[16][2] = {
 	{  9.7f,  8.1f },
@@ -111,15 +139,19 @@ float cemiterioPos2[16][2] = {
 
 float matrizPosPecas[8][8][2];
 int matrizTabuleiro[8][8] = {
-	{ 7, 7, 7, 7, 7, 7, 7, 7 },
+	{ 8, 9,10,11,12,10, 9, 8 },
 	{ 7, 7, 7, 7, 7, 7, 7, 7 },
 	{ 0, 0, 0, 0, 0, 0, 0, 0 },
 	{ 0, 0, 0, 0, 0, 0, 0, 0 },
 	{ 0, 0, 0, 0, 0, 0, 0, 0 },
 	{ 0, 0, 0, 0, 0, 0, 0, 0 },
 	{ 1, 1, 1, 1, 1, 1, 1, 1 },
-	{ 1, 1, 1, 1, 1, 1, 1, 1 }
+	{ 2, 3, 4, 5, 6, 4, 3, 2 }
 };
+
+bool bLoaded;
+int iAttrBitField;
+int iNumFaces;
 
 struct pecaSelecionada {
 	Peca tipo;
@@ -201,21 +233,59 @@ void desenharPeca(Peca p, float xCoord, float yCoord, float zCoord) {
 	case peao1:
 	case peao2:
 		glPushMatrix();
-		glTranslatef(xCoord, yCoord, zCoord);
-		glRotatef(-90, 1, 0, 0);
-		glutSolidCylinder(basePeca * (0.65f), 0.1f, 50, 50);
+		glTranslatef(xCoord, yCoord + 0.48f, zCoord);
+		glScalef(0.65f, 0.65f, 0.65f);
+		glRotatef(0.0f, 0.0f, 0.0f, 0.0f);
+		loader->at(0)->draw();
 		glPopMatrix();
-
+		break;
+	case torre1:
+	case torre2:
 		glPushMatrix();
-		glTranslatef(xCoord, yCoord, zCoord);
-		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(basePeca * (0.6f), 0.6f, 50, 50);
+		glTranslatef(xCoord, yCoord + 0.51f, zCoord);
+		glScalef(0.68f, 0.68f, 0.68f);
+		glRotatef(0.0f, 0.0f, 0.0f, 0.0f);
+		loader->at(1)->draw();
 		glPopMatrix();
-
+		break;
+	case cavalo1:
+	case cavalo2:
 		glPushMatrix();
-		glTranslatef(xCoord, yCoord + 0.55f, zCoord);
-		glRotatef(-90, 1, 0, 0);
-		glutSolidSphere(basePeca * (0.4f), 50, 50);
+		glTranslatef(xCoord, yCoord + 0.63f, zCoord);
+		glScalef(0.88f, 0.88f, 0.88);
+		if (p == cavalo1)
+			glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+		else
+			glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+
+		loader->at(2)->draw();
+		glPopMatrix();
+		break;
+	case bispo1:
+	case bispo2:
+		glPushMatrix();
+		glTranslatef(xCoord, yCoord + 0.67f, zCoord);
+		glScalef(0.9f, 0.9f, 0.9f);
+		glRotatef(0.0f, 0.0f, 0.0f, 0.0f);
+		loader->at(3)->draw();
+		glPopMatrix();
+		break;
+	case rainha1:
+	case rainha2:
+		glPushMatrix();
+		glTranslatef(xCoord, yCoord + 0.76f, zCoord);
+		glScalef(1.0f, 1.0f, 1.0f);
+		glRotatef(0.0f, 0.0f, 0.0f, 0.0f);
+		loader->at(4)->draw();
+		glPopMatrix();
+		break;
+	case rei1:
+	case rei2:
+		glPushMatrix();
+		glTranslatef(xCoord, yCoord + 0.84f, zCoord);
+		glScalef(1.2f, 1.2f, 1.2f);
+		glRotatef(0.0f, 0.0f, 0.0f, 0.0f);
+		loader->at(5)->draw();
 		glPopMatrix();
 		break;
 	}
@@ -230,7 +300,7 @@ void adicionarNoCemiterio(Peca p) {
 			}
 		}
 	}
-	else 
+	else
 	{
 		for (int i = 0; i < sizeof(cemiterio1); i++) {
 			if (cemiterio1[i] == nenhum) {
@@ -273,7 +343,7 @@ void desenhaTabuleiro() {
 	glEnd();
 
 	glBegin(GL_QUADS); // lado de trás
-	glNormal3f(0.0f, 0.0f, -1.0f); 
+	glNormal3f(0.0f, 0.0f, -1.0f);
 	glVertex3f(C_BASE_X, C_ALT_TAB, C_BASE_Z);
 	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_BASE_Z);
 	glVertex3f(C_LADO_TAB_X, C_BASE_Y, C_BASE_Z);
@@ -281,7 +351,7 @@ void desenhaTabuleiro() {
 	glEnd();
 
 	glBegin(GL_QUADS); // lado da frente
-	glNormal3f(0.0f, 0.0f, 1.0f); 
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(C_BASE_X, C_ALT_TAB, C_LADO_TAB_Z);
 	glVertex3f(C_LADO_TAB_X, C_ALT_TAB, C_LADO_TAB_Z);
 	glVertex3f(C_LADO_TAB_X, C_BASE_Y, C_LADO_TAB_Z);
@@ -290,7 +360,7 @@ void desenhaTabuleiro() {
 
 	configureColor(white);
 
-	float bordaTotal = 0.6f;
+	GLfloat bordaTotal = 0.6f;
 
 	glBegin(GL_QUADS); // topo principal
 	glNormal3f(0.0f, 1.0f, 0.0f);
@@ -341,8 +411,8 @@ void desenhaTabuleiro() {
 			glBegin(GL_QUADS);
 			configureColor(useBlack ? blackChess : whiteChess);
 			glNormal3f(0.0f, 1.0f, 0.0f);
-			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB,			(Z * xPeca) + bordaTotal);
-			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB,			(Z * xPeca) + bordaTotal + zPeca);
+			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB, (Z * xPeca) + bordaTotal);
+			glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB, (Z * xPeca) + bordaTotal + zPeca);
 			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB, (Z * xPeca) + bordaTotal + zPeca);
 			glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB, (Z * xPeca) + bordaTotal);
 			glEnd();
@@ -374,8 +444,8 @@ void desenhaTabuleiro() {
 				glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal);
 				glVertex3f((X * xPeca) + bordaTotal, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal + zPeca);
 				configureColor(darkRedTransp);
-				glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal + zPeca);
-				glVertex3f((X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal);
+				glVertex3f((GLfloat)(X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal + zPeca);
+				glVertex3f((GLfloat)(X * xPeca) + bordaTotal + xPeca, C_ALT_TAB + 0.005, (Z * xPeca) + bordaTotal);
 				glEnd();
 				glEnable(GL_BLEND);
 			}
@@ -393,11 +463,11 @@ void display(void)
 	configureColor(brown);
 	glBegin(GL_QUADS);
 	float x = 2.0f, z = 2.5f;
-	glNormal3f(0.0f, 1.0f, 0.0f); 
-	glVertex3f(C_BASE_X - x,		C_BASE_Y,	C_BASE_Z - z		);
-	glVertex3f(C_BASE_X - x,		C_BASE_Y,	C_LADO_TAB_Z + z	);
-	glVertex3f(C_LADO_TAB_X + x,	C_BASE_Y,	C_LADO_TAB_Z + z	);
-	glVertex3f(C_LADO_TAB_X + x,	C_BASE_Y,	C_BASE_Z - z		);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(C_BASE_X - x, C_BASE_Y, C_BASE_Z - z);
+	glVertex3f(C_BASE_X - x, C_BASE_Y, C_LADO_TAB_Z + z);
+	glVertex3f(C_LADO_TAB_X + x, C_BASE_Y, C_LADO_TAB_Z + z);
+	glVertex3f(C_LADO_TAB_X + x, C_BASE_Y, C_BASE_Z - z);
 	glEnd;
 
 	desenhaTabuleiro();
@@ -405,7 +475,7 @@ void display(void)
 	for (int z = 0; z < 8; z++) {
 		for (int x = 0; x < 8; x++) {
 			if (matrizTabuleiro[z][x] > 0) {
-				if (matrizTabuleiro[z][x] < 6)
+				if (matrizTabuleiro[z][x] < 7)
 					configureColor(white);
 				else
 					configureColor(black);
@@ -440,9 +510,17 @@ void init(void)
 	glEnable(GL_LIGHT0);
 
 	glLightfv(GL_LIGHT0, GL_POSITION, luzPos);
-	glLightfv(GL_LIGHT0, GL_AMBIENT,  luzAmb);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE,  luzDif);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmb);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDif);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, luzSpe);
+
+	loader = new vector<OBJModel*>;
+	loader->push_back(new OBJModel("Modelos/obj/peao", 1.5f, true));
+	loader->push_back(new OBJModel("Modelos/obj/torre", 1.5f, true));
+	loader->push_back(new OBJModel("Modelos/obj/cavalo", 1.5f, true));
+	loader->push_back(new OBJModel("Modelos/obj/bispo", 1.5f, true));
+	loader->push_back(new OBJModel("Modelos/obj/rainha", 1.5f, true));
+	loader->push_back(new OBJModel("Modelos/obj/rei", 1.5f, true));
 }
 
 void refreshCamera() {
@@ -450,9 +528,9 @@ void refreshCamera() {
 	glLoadIdentity();
 
 	gluPerspective(50, proporcao, 0.1, 500);
-	gluLookAt(	C_LADO_TAB_X / 2, C_ALT_TAB + 6.0f, (playerAtual == player1) ? C_LADO_TAB_Z + 8 : C_BASE_Z - 8,
-				C_LADO_TAB_X / 2, C_ALT_TAB + 0.0f, C_LADO_TAB_Z / 2,
-				0.0f, 1.0f, 0.0f);
+	gluLookAt(C_LADO_TAB_X / 2, C_ALT_TAB + 6.0f, (playerAtual == player1) ? C_LADO_TAB_Z + 8 : C_BASE_Z - 8,
+		C_LADO_TAB_X / 2, C_ALT_TAB + 0.0f, C_LADO_TAB_Z / 2,
+		0.0f, 1.0f, 0.0f);
 
 	glutPostRedisplay();
 }
@@ -466,6 +544,15 @@ void reshape(GLsizei width, GLsizei height)
 }
 
 bool validarMovPeca(Peca p, Peca alvo, int posVelha[], int posNova[]) {
+	int xv = posVelha[0];
+	int xn = posNova[0];
+
+	int zv = posVelha[1];
+	int zn = posNova[1];
+
+	if ((xv == xn) && (zv == zn))
+		return false;
+
 	switch (p)
 	{
 	case peao1:
@@ -479,20 +566,60 @@ bool validarMovPeca(Peca p, Peca alvo, int posVelha[], int posNova[]) {
 		}
 
 		return false;
-		break;
 	case torre1:
-		break;
+	case torre2:
+		if (xv == xn)
+		{
+			if (zv > zn)
+			{
+				for (int pos = zv - 1; pos > zn; pos--)
+				{
+					if (matrizTabuleiro[pos][xv] > 0)
+						return false;
+				}
+			}
+			else
+			{
+				for (int pos = zv + 1; pos < zn; pos++)
+				{
+					if (matrizTabuleiro[pos][xv] > 0)
+						return false;
+				}
+			}
+
+			return true;
+		}
+		else if (zv == zn)
+		{
+			if (xv > xn)
+			{
+				for (int pos = xv - 1; pos > xn; pos--)
+				{
+					if (matrizTabuleiro[zv][pos] > 0)
+						return false;
+				}
+			}
+			else
+			{
+				for (int pos = xv + 1; pos < xn; pos++)
+				{
+					if (matrizTabuleiro[zv][pos] > 0)
+						return false;
+				}
+			}
+
+			return true;
+		}
+
+		return false;
 	case cavalo1:
+	case cavalo2:
 		break;
 	case bispo1:
 		break;
 	case rainha1:
 		break;
 	case rei1:
-		break;
-	case torre2:
-		break;
-	case cavalo2:
 		break;
 	case bispo2:
 		break;
@@ -503,6 +630,8 @@ bool validarMovPeca(Peca p, Peca alvo, int posVelha[], int posNova[]) {
 	default: return false;
 		break;
 	}
+
+	return false;
 }
 
 void keyboard(unsigned char key, int x, int y) {
@@ -535,8 +664,8 @@ void keyboard(unsigned char key, int x, int y) {
 							adicionarNoCemiterio(p);
 						}
 						matrizTabuleiro[pecaSelecionada.Z][pecaSelecionada.X] = 0;
-						if ((playerAtual == player1 && quadradoAtual[1] == 0) || (playerAtual == player2 && quadradoAtual[1] == 7)) {
-							matrizTabuleiro[quadradoAtual[1]][quadradoAtual[0]] = 5; // coloca uma rainha de volta
+						if (((playerAtual == player1 && quadradoAtual[1] == 0) && p == 1) || ((playerAtual == player2 && quadradoAtual[1] == 7) && p == 7)) {
+							matrizTabuleiro[quadradoAtual[1]][quadradoAtual[0]] = 5;
 						}
 						else
 						{
@@ -554,25 +683,25 @@ void keyboard(unsigned char key, int x, int y) {
 }
 
 void keyboardSpecial(int key, int x, int y) {
-		switch (key)
-		{
-		case GLUT_KEY_LEFT: 
-			if ((playerAtual == player1) && (quadradoAtual[0] > 0)) quadradoAtual[0]--;
-			else if ((playerAtual == player2) && (quadradoAtual[0] < 7)) quadradoAtual[0]++;
-			break;
-		case GLUT_KEY_RIGHT: 
-			if ((playerAtual == player1) && (quadradoAtual[0] < 7)) quadradoAtual[0]++;
-			else if ((playerAtual == player2) && (quadradoAtual[0] > 0)) quadradoAtual[0]--;
-			break;
-		case GLUT_KEY_UP: 
-			if ((playerAtual == player1) && (quadradoAtual[1] > 0)) quadradoAtual[1]--;
-			else if ((playerAtual == player2) && (quadradoAtual[1] < 7)) quadradoAtual[1]++;
-			break;
-		case GLUT_KEY_DOWN: 
-			if ((playerAtual == player1) && (quadradoAtual[1] < 7)) quadradoAtual[1]++;
-			else if ((playerAtual == player2) && (quadradoAtual[1] > 0)) quadradoAtual[1]--;
-			break;
-		}
+	switch (key)
+	{
+	case GLUT_KEY_LEFT:
+		if ((playerAtual == player1) && (quadradoAtual[0] > 0)) quadradoAtual[0]--;
+		else if ((playerAtual == player2) && (quadradoAtual[0] < 7)) quadradoAtual[0]++;
+		break;
+	case GLUT_KEY_RIGHT:
+		if ((playerAtual == player1) && (quadradoAtual[0] < 7)) quadradoAtual[0]++;
+		else if ((playerAtual == player2) && (quadradoAtual[0] > 0)) quadradoAtual[0]--;
+		break;
+	case GLUT_KEY_UP:
+		if ((playerAtual == player1) && (quadradoAtual[1] > 0)) quadradoAtual[1]--;
+		else if ((playerAtual == player2) && (quadradoAtual[1] < 7)) quadradoAtual[1]++;
+		break;
+	case GLUT_KEY_DOWN:
+		if ((playerAtual == player1) && (quadradoAtual[1] < 7)) quadradoAtual[1]++;
+		else if ((playerAtual == player2) && (quadradoAtual[1] > 0)) quadradoAtual[1]--;
+		break;
+	}
 
 	display;
 	refreshCamera();
@@ -589,7 +718,7 @@ int main(int argc, char **argv) {
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(keyboardSpecial);
 	init();
-	
+
 	glutMainLoop();
 	return 0;
 }
