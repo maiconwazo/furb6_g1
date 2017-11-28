@@ -614,14 +614,26 @@ bool validarMovPeca(Peca p, Peca alvo, int posVelha[], int posNova[]) {
 		return false;
 	case cavalo1:
 	case cavalo2:
-		break;
+		if (((zv + 1 == zn) && (xv + 2 == xn)) ||
+			((zv + 1 == zn) && (xv - 2 == xn)) ||
+			((zv - 1 == zn) && (xv + 2 == xn)) ||
+			((zv - 1 == zn) && (xv - 2 == xn)) ||
+			((xv + 1 == xn) && (zv + 2 == zn)) ||
+			((xv + 1 == xn) && (zv - 2 == zn)) ||
+			((xv - 1 == xn) && (zv + 2 == zn)) ||
+			((xv - 1 == xn) && (zv - 2 == zn)))
+			return true;
+
+		return false;
 	case bispo1:
+	case bispo2:
+		if (abs(xv - xn) == abs(zv - zn))
+			return true;
 		break;
 	case rainha1:
 		break;
 	case rei1:
 		break;
-	case bispo2:
 		break;
 	case rainha2:
 		break;
@@ -664,7 +676,7 @@ void keyboard(unsigned char key, int x, int y) {
 							adicionarNoCemiterio(p);
 						}
 						matrizTabuleiro[pecaSelecionada.Z][pecaSelecionada.X] = 0;
-						if (((playerAtual == player1 && quadradoAtual[1] == 0) && p == 1) || ((playerAtual == player2 && quadradoAtual[1] == 7) && p == 7)) {
+						if ((playerAtual == player1 && quadradoAtual[1] == 0 && pecaSelecionada.tipo == peao1) || (playerAtual == player2 && quadradoAtual[1] == 7 && pecaSelecionada.tipo ==peao2)) {
 							matrizTabuleiro[quadradoAtual[1]][quadradoAtual[0]] = 5;
 						}
 						else
