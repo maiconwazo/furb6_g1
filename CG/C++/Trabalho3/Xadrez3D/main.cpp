@@ -139,14 +139,14 @@ float cemiterioPos2[16][2] = {
 
 float matrizPosPecas[8][8][2];
 int matrizTabuleiro[8][8] = {
-	{ 8, 9,10,11,12,10, 9, 8 },
+	{ 8, 9,10,12,11,10, 9, 8 },
 	{ 7, 7, 7, 7, 7, 7, 7, 7 },
 	{ 0, 0, 0, 0, 0, 0, 0, 0 },
 	{ 0, 0, 0, 0, 0, 0, 0, 0 },
 	{ 0, 0, 0, 0, 0, 0, 0, 0 },
 	{ 0, 0, 0, 0, 0, 0, 0, 0 },
 	{ 1, 1, 1, 1, 1, 1, 1, 1 },
-	{ 2, 3, 4, 5, 6, 4, 3, 2 }
+	{ 2, 3, 4, 6, 5, 4, 3, 2 }
 };
 
 bool bLoaded;
@@ -628,17 +628,189 @@ bool validarMovPeca(Peca p, Peca alvo, int posVelha[], int posNova[]) {
 	case bispo1:
 	case bispo2:
 		if (abs(xv - xn) == abs(zv - zn))
+		{
+			bool xPositivo = xn - xv >= 0;
+			bool zPositivo = zn - zv >= 0;
+
+			int deslocamento = abs(xv - xn);
+			for (int i = 1; i < deslocamento; i++)
+			{
+				int zPos = 0;
+				int xPos = 0;
+
+				if (zPositivo)
+					zPos = zv + i;
+				else
+					zPos = zv - i;
+
+				if (xPositivo)
+					xPos = xv + i;
+				else
+					xPos = xv - i;
+
+					if (matrizTabuleiro[zPos][xPos] > 0)
+					{
+						return false;
+					}
+			}
+
 			return true;
-		break;
+		}
+
+		return false;
 	case rainha1:
-		break;
-	case rei1:
-		break;
-		break;
 	case rainha2:
-		break;
+		if (xv == xn)
+		{
+			if (zv > zn)
+			{
+				for (int pos = zv - 1; pos > zn; pos--)
+				{
+					if (matrizTabuleiro[pos][xv] > 0)
+						return false;
+				}
+			}
+			else
+			{
+				for (int pos = zv + 1; pos < zn; pos++)
+				{
+					if (matrizTabuleiro[pos][xv] > 0)
+						return false;
+				}
+			}
+
+			return true;
+		}
+		else if (zv == zn)
+		{
+			if (xv > xn)
+			{
+				for (int pos = xv - 1; pos > xn; pos--)
+				{
+					if (matrizTabuleiro[zv][pos] > 0)
+						return false;
+				}
+			}
+			else
+			{
+				for (int pos = xv + 1; pos < xn; pos++)
+				{
+					if (matrizTabuleiro[zv][pos] > 0)
+						return false;
+				}
+			}
+
+			return true;
+		}
+		else if (abs(xv - xn) == abs(zv - zn))
+		{
+			bool xPositivo = xn - xv >= 0;
+			bool zPositivo = zn - zv >= 0;
+
+			int deslocamento = abs(xv - xn);
+			for (int i = 1; i < deslocamento; i++)
+			{
+				int zPos = 0;
+				int xPos = 0;
+
+				if (zPositivo)
+					zPos = zv + i;
+				else
+					zPos = zv - i;
+
+				if (xPositivo)
+					xPos = xv + i;
+				else
+					xPos = xv - i;
+
+				if (matrizTabuleiro[zPos][xPos] > 0)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		return false;
+	case rei1:
 	case rei2:
-		break;
+		if (abs(xv - xn) > 1 || abs(zv - zn) > 1)
+			return false;
+
+		if (xv == xn)
+		{
+			if (zv > zn)
+			{
+				for (int pos = zv - 1; pos > zn; pos--)
+				{
+					if (matrizTabuleiro[pos][xv] > 0)
+						return false;
+				}
+			}
+			else
+			{
+				for (int pos = zv + 1; pos < zn; pos++)
+				{
+					if (matrizTabuleiro[pos][xv] > 0)
+						return false;
+				}
+			}
+
+			return true;
+		}
+		else if (zv == zn)
+		{
+			if (xv > xn)
+			{
+				for (int pos = xv - 1; pos > xn; pos--)
+				{
+					if (matrizTabuleiro[zv][pos] > 0)
+						return false;
+				}
+			}
+			else
+			{
+				for (int pos = xv + 1; pos < xn; pos++)
+				{
+					if (matrizTabuleiro[zv][pos] > 0)
+						return false;
+				}
+			}
+
+			return true;
+		}
+		else if (abs(xv - xn) == abs(zv - zn))
+		{
+			bool xPositivo = xn - xv >= 0;
+			bool zPositivo = zn - zv >= 0;
+
+			int deslocamento = abs(xv - xn);
+			for (int i = 1; i < deslocamento; i++)
+			{
+				int zPos = 0;
+				int xPos = 0;
+
+				if (zPositivo)
+					zPos = zv + i;
+				else
+					zPos = zv - i;
+
+				if (xPositivo)
+					xPos = xv + i;
+				else
+					xPos = xv - i;
+
+				if (matrizTabuleiro[zPos][xPos] > 0)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		return false;
 	default: return false;
 		break;
 	}
@@ -675,9 +847,12 @@ void keyboard(unsigned char key, int x, int y) {
 						if (p > 0) {
 							adicionarNoCemiterio(p);
 						}
-						matrizTabuleiro[pecaSelecionada.Z][pecaSelecionada.X] = 0;
-						if ((playerAtual == player1 && quadradoAtual[1] == 0 && pecaSelecionada.tipo == peao1) || (playerAtual == player2 && quadradoAtual[1] == 7 && pecaSelecionada.tipo ==peao2)) {
+						matrizTabuleiro[pecaSelecionada.Z][pecaSelecionada.X] = 0; 
+						if (playerAtual == player1 && quadradoAtual[1] == 0 && pecaSelecionada.tipo == peao1) {
 							matrizTabuleiro[quadradoAtual[1]][quadradoAtual[0]] = 5;
+						}
+						else if (playerAtual == player2 && quadradoAtual[1] == 7 && pecaSelecionada.tipo == peao2) {
+							matrizTabuleiro[quadradoAtual[1]][quadradoAtual[0]] = 11;
 						}
 						else
 						{
