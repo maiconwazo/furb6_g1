@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Pecas">
+      <UniqueIdentifier>{dbd47d15-c3d6-4264-ac55-2dc12e692dc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pecas">
+      <UniqueIdentifier>{070c8de2-9fd6-41f5-bb53-ca8f14ae758c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loadObj">
+      <UniqueIdentifier>{c6424149-4bbe-4eea-ae0b-881af25f6819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\loadObj">
+      <UniqueIdentifier>{75eee05b-44e6-4c2c-a0ea-d3692e7e2cf4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Pecas\ModeloBispo.cpp">
+      <Filter>Pecas</Filter>
+    </ClCompile>
+    <ClCompile Include="Pecas\ModeloCavalo.cpp">
+      <Filter>Pecas</Filter>
+    </ClCompile>
+    <ClCompile Include="Pecas\ModeloPeao.cpp">
+      <Filter>Pecas</Filter>
+    </ClCompile>
+    <ClCompile Include="Pecas\ModeloPeca.cpp">
+      <Filter>Pecas</Filter>
+    </ClCompile>
+    <ClCompile Include="Pecas\ModeloRainha.cpp">
+      <Filter>Pecas</Filter>
+    </ClCompile>
+    <ClCompile Include="Pecas\ModeloRei.cpp">
+      <Filter>Pecas</Filter>
+    </ClCompile>
+    <ClCompile Include="Pecas\ModeloTorre.cpp">
+      <Filter>Pecas</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cemiterio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeloTabuleiro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mundo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loadObj\FaceMaterials.cpp">
+      <Filter>loadObj</Filter>
+    </ClCompile>
+    <ClCompile Include="loadObj\Faces.cpp">
+      <Filter>loadObj</Filter>
+    </ClCompile>
+    <ClCompile Include="loadObj\Material.cpp">
+      <Filter>loadObj</Filter>
+    </ClCompile>
+    <ClCompile Include="loadObj\Materials.cpp">
+      <Filter>loadObj</Filter>
+    </ClCompile>
+    <ClCompile Include="loadObj\ModelDimensions.cpp">
+      <Filter>loadObj</Filter>
+    </ClCompile>
+    <ClCompile Include="loadObj\OBJModel.cpp">
+      <Filter>loadObj</Filter>
+    </ClCompile>
+    <ClCompile Include="loadObj\Tokenizer.cpp">
+      <Filter>loadObj</Filter>
+    </ClCompile>
+    <ClCompile Include="loadObj\Tuple3.cpp">
+      <Filter>loadObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Pecas\ModeloPadrao.cpp">
+      <Filter>Pecas</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pecas\ModeloBispo.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\ModeloCavalo.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\ModeloPeao.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\ModeloPeca.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\ModeloRainha.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\ModeloRei.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\ModeloTorre.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cemiterio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeloTabuleiro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mundo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj\FaceMaterials.h">
+      <Filter>Header Files\loadObj</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj\Faces.h">
+      <Filter>Header Files\loadObj</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj\Material.h">
+      <Filter>Header Files\loadObj</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj\Materials.h">
+      <Filter>Header Files\loadObj</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj\ModelDimensions.h">
+      <Filter>Header Files\loadObj</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj\OBJModel.h">
+      <Filter>Header Files\loadObj</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj\Tokenizer.h">
+      <Filter>Header Files\loadObj</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj\Tuple3.h">
+      <Filter>Header Files\loadObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\ModeloPadrao.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\Types.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pecas\Consts.h">
+      <Filter>Header Files\Pecas</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
