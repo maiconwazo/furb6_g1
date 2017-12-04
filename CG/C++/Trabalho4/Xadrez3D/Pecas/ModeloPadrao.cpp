@@ -96,7 +96,7 @@ void ModeloPadrao::Desenhar()
 	{
 		glPushMatrix();
 		PositionX = GetPositionX();
-		PositionX = GetPositionZ();
+		PositionZ = GetPositionZ();
 		PosicionaModelo();
 		ObjetoGrafico->draw();
 		glPopMatrix();
