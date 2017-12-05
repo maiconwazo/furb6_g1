@@ -19,5 +19,7 @@ public:
 	~ModeloPeca();
 
 	virtual bool ValidarMovimento(ModeloPeca *alvo, int x, int z, ModeloPeca* matrizPecas[8][8]);
+	virtual bool Promover();
+	virtual bool Rei();
 };
 

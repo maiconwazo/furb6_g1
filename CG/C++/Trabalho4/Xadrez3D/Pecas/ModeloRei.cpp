@@ -99,3 +99,8 @@ bool ModeloRei::ValidarMovimento(ModeloPeca *alvo, int x, int z, ModeloPeca* mat
 
 	return false;
 }
+
+bool ModeloRei::Rei()
+{
+	return true;
+}

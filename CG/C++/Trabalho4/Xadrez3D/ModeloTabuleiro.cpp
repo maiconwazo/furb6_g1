@@ -102,10 +102,11 @@ void ModeloTabuleiro::Desenhar()
 
 	for (int x = 0; x < 8; x++)
 		for (int z = 0; z < 8; z++)
-			if (MatrizTabuleiro[x][z] != nullptr) MatrizTabuleiro[x][z]->Desenhar();
+			if (MatrizTabuleiro[x][z] != nullptr) 
+				MatrizTabuleiro[x][z]->Desenhar();
 }
 
-void ModeloTabuleiro::Clicar(unsigned char key, int x, int y, Player jogadorAtual, Cemiterio *cemiterio)
+bool ModeloTabuleiro::Clicar(unsigned char key, int x, int y, Player jogadorAtual, Cemiterio *cemiterio)
 {
 	if (key == 32) {
 		ModeloPeca *peca = MatrizTabuleiro[PosicaoFocada[1]][PosicaoFocada[0]];
@@ -121,14 +122,16 @@ void ModeloTabuleiro::Clicar(unsigned char key, int x, int y, Player jogadorAtua
 					if ((peca == nullptr) || jogadorAtual != peca->Jogador) {
 						if (peca != nullptr) {
 							cemiterio->AdicionarPeca(peca);
+							Acabou = peca->Rei();
+							if (Acabou) Ganhardor = PecaSelecionada->Jogador;
 						}
 
 						MatrizTabuleiro[PecaSelecionada->Z][PecaSelecionada->X] = nullptr;
-						if (jogadorAtual == player1 && PosicaoFocada[1] == 0 && typeid(PecaSelecionada) == typeid(ModeloPeao)) {
+						if (jogadorAtual == player1 && PosicaoFocada[1] == 0 && PecaSelecionada->Promover()) {
 							MatrizTabuleiro[PosicaoFocada[1]][PosicaoFocada[0]] = new ModeloRainha(ObjRainha, player1, PosicaoFocada[0], PosicaoFocada[1]);
 						}
 						else 
-						if (jogadorAtual == player2 && PosicaoFocada[1] == 7 && typeid(PecaSelecionada) == typeid(ModeloPeao)) {
+						if (jogadorAtual == player2 && PosicaoFocada[1] == 7 && PecaSelecionada->Promover()) {
 							MatrizTabuleiro[PosicaoFocada[1]][PosicaoFocada[0]] = new ModeloRainha(ObjRainha, player2, PosicaoFocada[0], PosicaoFocada[1]);
 						}
 						else
@@ -137,11 +140,15 @@ void ModeloTabuleiro::Clicar(unsigned char key, int x, int y, Player jogadorAtua
 							PecaSelecionada->Z = PosicaoFocada[1];
 							MatrizTabuleiro[PosicaoFocada[1]][PosicaoFocada[0]] = PecaSelecionada;
 						}
+
+						return true;
 					}
 				}
 			}
 		}
+		return false;
 	}
+	return false;
 }
 
 void ModeloTabuleiro::Movimentar(int key, int x, int y, Player jogadorAtual)

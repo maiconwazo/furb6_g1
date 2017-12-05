@@ -17,7 +17,19 @@ void reshape(GLsizei width, GLsizei height)
 
 void keyboard(unsigned char key, int x, int y)
 {
-	MundoObj->JogoObj->Tabuleiro->Clicar(key, x, y, MundoObj->JogoObj->GetJogadorAtual(), MundoObj->JogoObj->CemiterioObj);
+	if (MundoObj->JogoObj->Tabuleiro->Clicar(key, x, y, MundoObj->JogoObj->GetJogadorAtual(), MundoObj->JogoObj->CemiterioObj))
+	{
+		if (MundoObj->JogoObj->Tabuleiro->Acabou)
+		{
+			glutLeaveMainLoop();
+		}
+		else
+		{
+			MundoObj->JogoObj->SetJogadorAtual();
+			MundoObj->CameraObj->AlternarCamera();
+		}
+	}
+
 	MundoObj->Desenhar();
 }
 
@@ -25,6 +37,11 @@ void keyboardSpecial(int key, int x, int y)
 {
 	MundoObj->JogoObj->Tabuleiro->Movimentar(key, x, y, MundoObj->JogoObj->GetJogadorAtual());
 	MundoObj->Desenhar();
+}
+
+void idle()
+{
+	MundoObj->CameraObj->Atualizar();
 }
 
 int main(int argc, char **argv) 
@@ -37,9 +54,42 @@ int main(int argc, char **argv)
 	MundoObj = new Mundo();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
-	glutKeyboardFunc(keyboard);
+	glutKeyboardFunc(keyboard);													   
 	glutSpecialFunc(keyboardSpecial);
+	glutIdleFunc(idle);
 	glutMainLoop();
+	
+	if (MundoObj->JogoObj->Tabuleiro->Ganhardor == player1)
+	{
+		cout << "#############################################################################################" << "\n";
+		cout << "#          ###   ########           ###   ######   ###          ###           ########   ####" << "\n";
+		cout << "#   ####   ###   ########   #####   ###   ######   ###   ##########   #####   ######     ####" << "\n";
+		cout << "#   ####   ###   ########   #####   #####   ##   #####   ##########   #####   ########   ####" << "\n";
+		cout << "#          ###   ########           #######    #######       ######           ########   ####" << "\n";
+		cout << "#   ##########   ########   #####   ########   #######   ##########   ###   ##########   ####" << "\n";
+		cout << "#   ##########         ##   #####   ########   #######          ###   #####   ######       ##" << "\n";
+		cout << "#############################################################################################" << "\n";
+	}
+	else
+	{
+		cout << "#############################################################################################" << "\n";
+		cout << "#          ###   ########           ###   ######   ###          ###           ####       ####" << "\n";
+		cout << "#   ####   ###   ########   #####   ###   ######   ###   ##########   #####   ###   ###   ###" << "\n";
+		cout << "#   ####   ###   ########   #####   #####   ##   #####   ##########   #####   ###  ####   ####" << "\n";
+		cout << "#          ###   ########           #######    #######       ######           #######   #####" << "\n";
+		cout << "#   ##########   ########   #####   ########   #######   ##########   ###   #######    ######" << "\n";
+		cout << "#   ##########         ##   #####   ########   #######          ###   #####   ###         ###" << "\n";
+		cout << "#############################################################################################" << "\n";
+	}
 
+	cout << "#############################################################################################" << "\n";
+	cout << "##################   ####################   ###   ###      #####   ##########################" << "\n";
+	cout << "###################   ##################   ####   ###   #   ####   ##########################" << "\n";
+	cout << "####################   ######   #######   #####   ###   ###   ##   ##########################" << "\n";
+	cout << "#####################   ####      ####   ######   ###   ####   #   ##########################" << "\n";
+	cout << "######################   ##   ##   ##   #######   ###   #####      ##########################" << "\n";
+	cout << "#######################     ######     ########   ###   ######     ##########################" << "\n";
+	cout << "#############################################################################################" << "\n";
+	cin.ignore();
 	return 0;
 }

@@ -26,12 +26,14 @@ class ModeloTabuleiro : ModeloPadrao
 	OBJModel *ObjQuadrado;
 	OBJModel *ObjMoldura;
 public:
+	bool Acabou = false;
+	Player Ganhardor = player1;
 	ModeloPeca* MatrizTabuleiro[8][8];
 	ModeloTabuleiro(OBJModel *objetoGrafico);
 	~ModeloTabuleiro();
 
 	void Desenhar() override;
-	void Clicar(unsigned char key, int x, int y, Player jogadorAtual, Cemiterio *cemiterio);
+	bool Clicar(unsigned char key, int x, int y, Player jogadorAtual, Cemiterio *cemiterio);
 	void Movimentar(int key, int x, int y, Player jogadorAtual);
 };
 

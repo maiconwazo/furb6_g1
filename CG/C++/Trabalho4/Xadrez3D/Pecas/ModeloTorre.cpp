@@ -3,7 +3,10 @@
 void ModeloTorre::PosicionaModelo()
 {
 	ModeloPeca::PosicionaModelo();
-	glTranslatef(X * 1.5f, 0.92f, Z * 1.5f);
+	if (Morta)
+		glTranslatef(PositionX, 0.90f, PositionZ);
+	else
+		glTranslatef(X * 1.5f, 0.92f, Z * 1.5f);
 	glScalef(0.9f, 0.9f, 0.9f);
 	glRotatef(0.0f, 0.0f, 0.0f, 0.0f);
 }

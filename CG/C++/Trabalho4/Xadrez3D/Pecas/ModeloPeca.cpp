@@ -41,3 +41,13 @@ bool ModeloPeca::ValidarMovimento(ModeloPeca *alvo, int x, int z, ModeloPeca* ma
 
 	return false;
 }
+
+bool ModeloPeca::Promover()
+{
+	return false;
+}
+
+bool ModeloPeca::Rei()
+{
+	return false;
+}

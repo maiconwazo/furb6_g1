@@ -2,14 +2,6 @@
 #include <glew.h>
 #include <freeglut.h>
 
-const GLfloat C_BASE_X = 0.0f;
-const GLfloat C_BASE_Y = 0.0f;
-const GLfloat C_BASE_Z = 0.0f;
-
-const GLfloat C_ALT_TAB = 0.3f + C_BASE_Y;
-const GLfloat C_LADO_TAB_X = 9.0f + C_BASE_X;
-const GLfloat C_LADO_TAB_Z = 9.0f + C_BASE_Z;
-
 const GLfloat C_COR_FUNDO[] = { 0.2f, 0.2f, 0.5f, 1.0f };
 
 /* Definições de iluminação */
@@ -60,3 +52,5 @@ const GLfloat redTranspSpe[] = { 0.6f, 0.0f, 0.6f, 0.6f };
 const GLfloat darkRedTranspAmb[] = { 0.1f, 0.0f, 0.1f, 0.8f };
 const GLfloat darkRedTranspDif[] = { 0.3f, 0.0f, 0.3f, 0.8f };
 const GLfloat darkRedTranspSpe[] = { 0.1f, 0.0f, 0.1f, 0.8f };
+
+const GLfloat glassAmb[] = { 0.6f, 0.8f, 1.0f, 0.6f };

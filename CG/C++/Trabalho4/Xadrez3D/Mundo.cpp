@@ -8,9 +8,9 @@ Mundo::Mundo()
 	glEnable(GL_LIGHT0);
 	
 	/* Luz */
-	GLfloat luzPos[] = { C_LADO_TAB_X / 2,  6.0f, C_LADO_TAB_Z / 2, 1.0f };
-	GLfloat luzAmb[] = { 0.0f,  0.0f, 0.0f, 1.0f };
-	GLfloat luzDif[] = { 1.0f,  1.0f, 1.0f, 1.0f };
+	GLfloat luzPos[] = { 6.0f,  6.0f, 6.0f, 1.0f };
+	GLfloat luzAmb[] = { 0.3f,  0.3f, 0.3f, 1.0f };
+	GLfloat luzDif[] = { 0.8f,  0.8f, 0.8f, 1.0f };
 	GLfloat luzSpe[] = { 0.3f,  0.3f, 0.3f, 0.0f };
 
 	glLightfv(GL_LIGHT0, GL_POSITION, luzPos);

@@ -73,6 +73,11 @@ void ModeloPadrao::SetCor(Cor c)
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, darkRedTranspAmb);
 		glMaterialfv(GL_FRONT, GL_SPECULAR, darkRedTranspAmb);
 		break;
+	case glass:
+		glMaterialfv(GL_FRONT, GL_AMBIENT, glassAmb);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, glassAmb);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, glassAmb);
+		break;
 	}
 }
 

@@ -8,5 +8,6 @@ public:
 	ModeloPeao(OBJModel *objetoGrafico, Player jogador, int x, int z);
 	~ModeloPeao();
 	bool ValidarMovimento(ModeloPeca *alvo, int x, int z, ModeloPeca* matrizPecas[8][8]) override;
+	bool Promover() override;
 };
 
