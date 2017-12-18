@@ -1,0 +1,17 @@
+C:\DSS\TrabalhoFinal\Cliente\bin\Debug\Cliente.exe.config
+C:\DSS\TrabalhoFinal\Cliente\bin\Debug\Cliente.exe
+C:\DSS\TrabalhoFinal\Cliente\bin\Debug\Cliente.pdb
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.Properties.Resources.resources
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.csproj.GenerateResource.Cache
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.exe
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.pdb
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.frLogin.resources
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.frMain.resources
+C:\DSS\TrabalhoFinal\Cliente\bin\Debug\INIFileParser.dll
+C:\DSS\TrabalhoFinal\Cliente\bin\Debug\INIFileParser.xml
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.csprojResolveAssemblyReference.cache
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.IPConfig.resources
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.NewMessage.resources
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.MensagemDetalhe.resources
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.CadastroUsuario.resources
+C:\DSS\TrabalhoFinal\Cliente\obj\Debug\Cliente.ConsultaEnviadas.resources
