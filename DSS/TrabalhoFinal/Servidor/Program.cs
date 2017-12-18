@@ -12,12 +12,6 @@ namespace Servidor
 	{
 		static void Main(string[] args)
 		{
-			var usuarionormal = new User();
-			usuarionormal.UserName = "gchurros1";
-			usuarionormal.Name = "Joao teste";
-			usuarionormal.Hierarchy = Library.Level.lvMod;
-			usuarionormal.Generate("maicon123");
-
 			var admin = new User();
 			admin.UserName = "gchurros";
 			admin.Name = "Maicon Santos da Silva";
